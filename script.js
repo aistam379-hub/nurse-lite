@@ -3346,29 +3346,19 @@
       // initializeData() تُستدعى من onAuth بعد التحقق من تسجيل الدخول
       applySettings();
       fillTimeSelect('patientBookSlot');
-      renderSlotSettingsEditor();
       var _h = location.hash.slice(1);
-      var _validN = ['calendar','appointments','patients'];
-      var _initN = _validN.includes(_h) ? _h : 'calendar';
+      var _validN = ['patients'];
+      var _initN = _validN.includes(_h) ? _h : 'patients';
       _histNav = true; setActiveSection(_initN); _histNav = false;
       history.replaceState({ section: _initN }, '', '#' + _initN);
-      if (typeof setScheduleView === 'function') setScheduleView(scheduleView);
       const todayStr = today.toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-      document.getElementById('nurseHeaderDate').textContent = todayStr;
+      var _nhd = document.getElementById('nurseHeaderDate'); if (_nhd) _nhd.textContent = todayStr;
       const sidebarDate = document.getElementById('sidebarNurseDate');
       if (sidebarDate) sidebarDate.textContent = todayStr;
 
       // Nav listeners
-      // sidebarAppointments يستخدم onclick مباشرة الآن
       document.getElementById('sidebarPatients').addEventListener('click',()=>setActiveSection('patients'));
-      document.getElementById('sidebarCalendar').addEventListener('click',()=>setActiveSection('calendar'));
-      // mobileAppointments يستخدم onclick مباشرة الآن
       document.getElementById('mobilePatients').addEventListener('click',()=>setActiveSection('patients'));
-      document.getElementById('mobileCalendar').addEventListener('click',()=>setActiveSection('calendar'));
-
-      document.getElementById('appointmentsPendingTab').addEventListener('click',()=>setAppointmentsTab('pending'));
-      document.getElementById('appointmentsAcceptedTab').addEventListener('click',()=>setAppointmentsTab('accepted'));
-      document.getElementById('searchInput').addEventListener('input',(e)=>{ searchQuery=e.target.value; renderBothAppointmentColumns(); });
 
       document.getElementById('addNewPatientBtn').addEventListener('click',()=>document.getElementById('patientBookModal').classList.remove('hidden'));
       document.getElementById('patientBookSearch').addEventListener('input',(e)=>{ patientSearchQuery=e.target.value; renderPatientBook(); });
