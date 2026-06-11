@@ -292,6 +292,8 @@
     let addVisitState = { patientId:null, patientName:'', patientPhone:'', patientBirthDate:'', patientAddress:'' };
     let deleteAppointmentId = null;
     let settings = { title: 'لوحة الممرضة', logo: null };
+    const NURSE_SETTINGS_KEY = 'nurseSettings';
+    (function() { try { var raw = localStorage.getItem(NURSE_SETTINGS_KEY); if (raw) settings = JSON.parse(raw) || {}; } catch (e) {} })();
     let currentArchiveTab = 'daily';
 
     // ================== Helpers ==================
@@ -838,7 +840,13 @@
 
       // الإعدادات
       window._fb.getDoc('settings', 'nurse').then(function(snap) {
-        if (snap.exists()) { settings = snap.data(); applySettings(); }
+        if (snap.exists()) {
+          var savedLogo = settings.logo || null;
+          settings = Object.assign({}, settings, snap.data());
+          if (!settings.logo && savedLogo) settings.logo = savedLogo;
+          try { localStorage.setItem(NURSE_SETTINGS_KEY, JSON.stringify(settings)); } catch(e) {}
+          applySettings();
+        }
       }).catch(function(){});
 
       // معلومات الطبيب/العيادة (يسجّلها الطبيب) — تُستخدم في طباعة الإضبارة
@@ -978,7 +986,10 @@
     }
 
     function saveSettingsToFirebase(newSettings) {
-      window._fb.setDoc(window._fb.docRef('settings', 'nurse'), newSettings)
+      try { localStorage.setItem(NURSE_SETTINGS_KEY, JSON.stringify(newSettings)); } catch(e) {}
+      var toSave = Object.assign({}, newSettings);
+      delete toSave.logo;
+      window._fb.setDoc(window._fb.docRef('settings', 'nurse'), toSave)
         .then(function() { showToast('تم حفظ الإعدادات','success'); })
         .catch(function(e) { showToast('فشل حفظ الإعدادات','error'); console.error(e); });
     }
