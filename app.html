@@ -1072,8 +1072,8 @@
                   <span id="logoPreviewIcon"><i class="fas fa-user-nurse"></i></span>
                   <img id="logoPreviewImg" class="hidden" src="" alt="">
                 </div>
-                <label class="s-avatar-cam" title="تغيير الصورة" onclick="document.getElementById('logoFileInput').click()"><i class="fas fa-camera"></i></label>
-                <input type="file" id="logoFileInput" accept="image/*" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;">
+                <label for="logoFileInput" class="s-avatar-cam" title="تغيير الصورة"><i class="fas fa-camera"></i></label>
+                <input type="file" id="logoFileInput" accept="image/*" onchange="window._handleLogoUpload&&window._handleLogoUpload(this)" style="position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;left:-9999px;top:-9999px;">
               </div>
               <div style="flex:1;min-width:0;">
                 <p style="font-weight:800;font-size:.95rem;color:var(--text);margin-bottom:2px;" id="profileDisplayName">لوحة الممرضة</p>

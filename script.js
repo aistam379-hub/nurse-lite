@@ -941,6 +941,31 @@
         .catch(function(e) { console.error(e); });
     }
 
+    window._submitNewPatient = function() {
+      var name  = (document.getElementById('patientBookName')      || {}).value || ''; name = name.trim();
+      var phone = (document.getElementById('patientBookPhone')     || {}).value || ''; phone = phone.trim();
+      var birth = (document.getElementById('patientBookBirthDate') || {}).value || '';
+      var addr  = (document.getElementById('patientBookAddress')   || {}).value || ''; addr = addr.trim();
+      var type  = (document.getElementById('patientBookVisitType') || {}).value || '';
+      var slot  = (document.getElementById('patientBookSlot')      || {}).value || TIME_SLOTS[0] || '';
+      if (!name || !phone || !birth || !type) { showToast('املأ البيانات الأساسية', 'error'); return; }
+      var patientId = 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+      var newPatient = { id: patientId, name: name, phone: phone, birthDate: birth, address: addr,
+        appointments: [{ date: todayStr, slot: slot, visitType: type, dayName: daysAr[today.getDay()] }],
+        firstVisit: todayStr, lastVisit: todayStr, totalVisits: 1 };
+      savePatient(newPatient);
+      var apptId2 = 'appt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+      window._fb.setDoc(window._fb.docRef('appointments', apptId2), {
+        id: apptId2, PatientName: name, Phone: phone, BirthDate: birth, Address: addr,
+        Date: todayStr, Slot: slot, VisitType: type, Status: 'Visited',
+        linkedPatientId: patientId, source: 'nurse_patients_book',
+        createdAt: window._fb.serverTimestamp()
+      }).catch(function(e) { console.error('[patientBook→appointments]', e); });
+      document.getElementById('patientBookModal').classList.add('hidden');
+      ['patientBookName','patientBookPhone','patientBookBirthDate','patientBookAddress','patientBookVisitType']
+        .forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+    };
+
     function savePatient(patient) {
       const patientId = patient.id || ('p_' + Date.now() + '_' + Math.random().toString(36).substr(2,6));
       patient.id = patientId;
@@ -3355,6 +3380,28 @@
       if (_vn.includes(s)) { _histNav = true; setActiveSection(s); _histNav = false; }
     });
 
+    // ── Logo upload (global — يعمل حتى لو DOMContentLoaded لم يكتمل) ──
+    window._handleLogoUpload = function(input) {
+      var file = input && input.files && input.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) { showToast('الرجاء اختيار ملف صورة', 'error'); return; }
+      if (file.size > 2 * 1024 * 1024) { showToast('حجم الصورة يجب أن يكون أقل من 2 ميغابايت', 'error'); return; }
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        settings.logo = ev.target.result;
+        try { localStorage.setItem(NURSE_SETTINGS_KEY, JSON.stringify(settings)); } catch(e) {}
+        var previewImg  = document.getElementById('logoPreviewImg');
+        var previewIcon = document.getElementById('logoPreviewIcon');
+        var removeBtn   = document.getElementById('removeLogoBtn');
+        if (previewImg)  { previewImg.src = ev.target.result; previewImg.classList.remove('hidden'); }
+        if (previewIcon) previewIcon.classList.add('hidden');
+        if (removeBtn)   removeBtn.classList.remove('hidden');
+        saveSettingsToFirebase(settings);
+        applySettings();
+      };
+      reader.readAsDataURL(file);
+    };
+
     // ================== DOMContentLoaded ==================
     document.addEventListener('DOMContentLoaded',()=>{
       // initializeData() تُستدعى من onAuth بعد التحقق من تسجيل الدخول
@@ -3365,10 +3412,10 @@
       var _initN = _validN.includes(_h) ? _h : 'patients';
       _histNav = true; setActiveSection(_initN); _histNav = false;
       history.replaceState({ section: _initN }, '', '#' + _initN);
-      const todayStr = today.toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-      var _nhd = document.getElementById('nurseHeaderDate'); if (_nhd) _nhd.textContent = todayStr;
+      const todayDisplayStr = today.toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+      var _nhd = document.getElementById('nurseHeaderDate'); if (_nhd) _nhd.textContent = todayDisplayStr;
       const sidebarDate = document.getElementById('sidebarNurseDate');
-      if (sidebarDate) sidebarDate.textContent = todayStr;
+      if (sidebarDate) sidebarDate.textContent = todayDisplayStr;
 
       // Nav listeners
       document.getElementById('sidebarPatients').addEventListener('click',()=>setActiveSection('patients'));
