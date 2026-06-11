@@ -3431,6 +3431,7 @@
           const removeBtn=document.getElementById('removeLogoBtn');
           previewImg.src=ev.target.result; previewImg.classList.remove('hidden');
           previewIcon.classList.add('hidden'); removeBtn.classList.remove('hidden');
+          autoSaveSettings();
         };
         reader.readAsDataURL(file);
       });
