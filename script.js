@@ -1132,8 +1132,10 @@
     // ── محرر سلوتات المواعيد ──
     const _fmtMin = function(m) { return String(Math.floor(m/60)).padStart(2,'0') + ':' + String(m%60).padStart(2,'0'); };
     window.toggleSecondPeriod = function() {
-      const on = document.getElementById('slotGen2Enabled').checked;
-      document.getElementById('slotGen2Wrap').style.display = on ? 'block' : 'none';
+      const el = document.getElementById('slotGen2Enabled');
+      const wrap = document.getElementById('slotGen2Wrap');
+      if (!el || !wrap) return;
+      wrap.style.display = el.checked ? 'block' : 'none';
     };
     function renderSlotSettingsEditor() {
       const ta = document.getElementById('settingsSlotsInput');
