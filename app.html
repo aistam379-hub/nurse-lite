@@ -730,64 +730,9 @@
     <div class="bottom-nav-item active" id="mobilePatients">
       <i class="fas fa-address-book"></i><span>المرضى</span>
     </div>
-    <div class="mob-fab-container">
-      <!-- Pills تظهر فوق الزر -->
-      <div id="mobPills">
-        <button class="fab-pill" onclick="closeMobFab();goToManualForm()">
-          <span class="fab-pill-icon appt">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M3 9h18"/><path d="M8 2v3M16 2v3"/><path d="M9 14.5l1.5 1.5 3-3"/></svg>
-          </span>
-          <span class="fab-pill-label">موعد يدوي</span>
-        </button>
-        <button class="fab-pill" onclick="closeMobFab();openMsgCustomizer()">
-          <span class="fab-pill-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </span>
-          <span class="fab-pill-label">تخصيص الرسائل</span>
-        </button>
-        <button class="fab-pill" onclick="closeMobFab();openNotesOverlay()">
-          <span class="fab-pill-icon notes">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </span>
-          <span class="fab-pill-label">ملاحظات</span>
-        </button>
-      </div>
-      <!-- الزر الرئيسي -->
-      <button class="fab-trigger" id="mobFabTrigger" onclick="toggleMobFab()" aria-label="قائمة سريعة">
-        <div class="fab-plus-icon"></div>
-      </button>
-    </div>
 
   </nav>
 
-  <!-- ========== DESKTOP SPEED DIAL ========== -->
-  <!-- Pills منفصلة بـ fixed — تتحرك بالـ JS حسب موقع الزر -->
-  <div id="desktopPills">
-    <button class="fab-pill" id="deskPillAppt" onclick="closeFabDial();goToManualForm()">
-      <span class="fab-pill-icon appt">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M3 9h18"/><path d="M8 2v3M16 2v3"/><path d="M9 14.5l1.5 1.5 3-3"/></svg>
-      </span>
-      <span class="fab-pill-label">موعد يدوي</span>
-    </button>
-    <button class="fab-pill" id="deskPillMsgs" onclick="closeFabDial();openMsgCustomizer()">
-      <span class="fab-pill-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </span>
-      <span class="fab-pill-label">تخصيص الرسائل</span>
-    </button>
-    <button class="fab-pill" id="deskPillNotes" onclick="closeFabDial();openNotesOverlay()">
-      <span class="fab-pill-icon notes">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </span>
-      <span class="fab-pill-label">ملاحظات</span>
-    </button>
-  </div>
-  <!-- الزر الرئيسي فقط -->
-  <div id="desktopSpeedDial">
-    <button class="fab-trigger" id="desktopFabMain" onclick="toggleFabDial()" title="قائمة سريعة">
-      <div class="fab-plus-icon"></div>
-    </button>
-  </div>
   
 
   <!-- ========== MODALS ========== -->
@@ -1109,8 +1054,6 @@
       <!-- Mobile Tabs -->
       <div class="settings-tabs">
         <button class="stab active" data-panel="profile" onclick="switchSettingsPanel('profile')">الملف الشخصي</button>
-        <button class="stab" data-panel="schedule" onclick="switchSettingsPanel('schedule')">الدوام</button>
-        <button class="stab" data-panel="offdays" onclick="switchSettingsPanel('offdays')">العطل</button>
         <button class="stab" data-panel="support" onclick="switchSettingsPanel('support')">الدعم</button>
       </div>
 
@@ -1120,8 +1063,6 @@
         <!-- Sidebar Nav (desktop) -->
         <nav class="settings-snav">
           <button class="sni active" data-panel="profile" onclick="switchSettingsPanel('profile')"><i class="fas fa-user-nurse"></i><span>الملف الشخصي</span></button>
-          <button class="sni" data-panel="schedule" onclick="switchSettingsPanel('schedule')"><i class="far fa-clock"></i><span>الدوام والحجز</span></button>
-          <button class="sni" data-panel="offdays" onclick="switchSettingsPanel('offdays')"><i class="fas fa-calendar-xmark"></i><span>أيام العطلة</span></button>
           <button class="sni" data-panel="support" onclick="switchSettingsPanel('support')"><i class="fas fa-headset"></i><span>الدعم</span></button>
         </nav>
 
@@ -1158,75 +1099,6 @@
             </div>
           </div>
 
-          <!-- Panel: Schedule -->
-          <div class="spanel" id="spanel-schedule">
-            <div class="sgroup">
-              <div class="sgroup-label">الفترة الأولى (صباحية)</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                <div>
-                  <label class="form-label" style="font-size:.74rem;margin-bottom:4px;">من</label>
-                  <div style="display:flex;align-items:center;gap:5px;">
-                    <input type="time" id="slotGenFrom" class="form-input" value="08:00" style="direction:ltr;flex:1;" oninput="updateAmPm('slotGenFrom','_ap_f1')" onchange="autoSaveSettings()">
-                    <span id="_ap_f1" style="font-size:.72rem;font-weight:800;color:var(--primary);min-width:14px;text-align:center;">ص</span>
-                  </div>
-                </div>
-                <div>
-                  <label class="form-label" style="font-size:.74rem;margin-bottom:4px;">إلى</label>
-                  <div style="display:flex;align-items:center;gap:5px;">
-                    <input type="time" id="slotGenTo" class="form-input" value="12:00" style="direction:ltr;flex:1;" oninput="updateAmPm('slotGenTo','_ap_t1')" onchange="autoSaveSettings()">
-                    <span id="_ap_t1" style="font-size:.72rem;font-weight:800;color:var(--primary);min-width:14px;text-align:center;">م</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <label style="display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;color:var(--text);cursor:pointer;padding:11px 14px;background:var(--bg);border-radius:12px;border:1.5px solid var(--border);">
-              <input type="checkbox" id="slotGen2Enabled" onchange="toggleSecondPeriod()" style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;">
-              فترة ثانية (مسائية)
-            </label>
-            <div id="slotGen2Wrap" style="display:none;">
-              <div class="sgroup">
-                <div class="sgroup-label">الفترة الثانية (مسائية)</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                  <div>
-                    <label class="form-label" style="font-size:.74rem;margin-bottom:4px;">من</label>
-                    <div style="display:flex;align-items:center;gap:5px;">
-                      <input type="time" id="slotGenFrom2" class="form-input" value="16:00" style="direction:ltr;flex:1;" oninput="updateAmPm('slotGenFrom2','_ap_f2')" onchange="autoSaveSettings()">
-                      <span id="_ap_f2" style="font-size:.72rem;font-weight:800;color:#6366f1;min-width:14px;text-align:center;">م</span>
-                    </div>
-                  </div>
-                  <div>
-                    <label class="form-label" style="font-size:.74rem;margin-bottom:4px;">إلى</label>
-                    <div style="display:flex;align-items:center;gap:5px;">
-                      <input type="time" id="slotGenTo2" class="form-input" value="20:00" style="direction:ltr;flex:1;" oninput="updateAmPm('slotGenTo2','_ap_t2')" onchange="autoSaveSettings()">
-                      <span id="_ap_t2" style="font-size:.72rem;font-weight:800;color:#6366f1;min-width:14px;text-align:center;">م</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="srow">
-              <div class="srow-label"><i class="fas fa-stopwatch"></i>مدة الموعد</div>
-              <select id="slotGenStep" class="form-input" style="width:auto;min-width:110px;" onchange="autoSaveSettings()">
-                <option value="15">15 دقيقة</option><option value="20">20 دقيقة</option><option value="30" selected>30 دقيقة</option><option value="60">60 دقيقة</option>
-              </select>
-            </div>
-            <button type="button" onclick="generateSlots()" class="btn-primary" style="width:100%;justify-content:center;"><i class="fas fa-wand-magic-sparkles"></i> توليد أوقات الحجز</button>
-            <details>
-              <summary style="font-size:.75rem;color:var(--text-muted);cursor:pointer;padding:4px 0;">تعديل يدوي متقدم للأوقات</summary>
-              <textarea id="settingsSlotsInput" class="form-input" rows="3" style="resize:vertical;font-family:'DM Mono',monospace;direction:ltr;text-align:left;margin-top:8px;" placeholder="08:00, 08:30, 09:00 ..." onchange="autoSaveSettings()"></textarea>
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px;">
-                <p style="font-size:.68rem;color:var(--text-muted);">أوقات مفصولة بفاصلة (HH:MM).</p>
-                <button type="button" onclick="resetSlotSettings()" style="font-size:.72rem;font-weight:700;color:var(--primary);background:var(--primary-light);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;font-family:inherit;">استعادة الافتراضي</button>
-              </div>
-            </details>
-          </div>
-
-          <!-- Panel: Off Days -->
-          <div class="spanel" id="spanel-offdays">
-            <p style="font-size:.82rem;color:var(--text-muted);">أيام العطلة الأسبوعية — يُغلق الحجز فيها تلقائياً:</p>
-            <div id="weeklyOffChips" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
-          </div>
-
           <!-- Panel: Support -->
           <div class="spanel" id="spanel-support">
             <div class="support-header">
@@ -1239,7 +1111,7 @@
             <div class="support-info-card">
               <div class="support-info-row">
                 <span class="support-info-label">الإصدار</span>
-                <span class="support-info-val">DocBook Pro v1</span>
+                <span class="support-info-val">DocBook Lite</span>
               </div>
               <div class="support-info-row">
                 <span class="support-info-label">المطوّر</span>
@@ -1342,7 +1214,7 @@
               <p class="faq-section-title" style="margin-top:14px;"><i class="fas fa-info-circle"></i>معلومات التطبيق</p>
               <div class="faq-item">
                 <div class="faq-q">ما هو الإصدار الحالي من DocBook؟</div>
-                <div class="faq-a"><div class="faq-a-inner">الإصدار الحالي هو DocBook Pro v1، مطوَّر بالكامل من قِبل Nawaacodes.</div></div>
+                <div class="faq-a"><div class="faq-a-inner">الإصدار الحالي هو DocBook Lite، مطوَّر بالكامل من قِبل Nawaacodes.</div></div>
               </div>
               <div class="faq-item">
                 <div class="faq-q">على أي منصة يعمل النظام؟</div>
