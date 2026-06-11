@@ -1128,6 +1128,9 @@
         if (previewIcon) previewIcon.classList.remove('hidden');
         if (removeBtn)   removeBtn.classList.add('hidden');
       }
+      renderSlotSettingsEditor();
+      updateAmPm('slotGenFrom','_ap_f1'); updateAmPm('slotGenTo','_ap_t1');
+      updateAmPm('slotGenFrom2','_ap_f2'); updateAmPm('slotGenTo2','_ap_t2');
       document.getElementById('settingsModal').classList.remove('hidden');
     };
     // ── محرر سلوتات المواعيد ──
@@ -1945,7 +1948,7 @@
       var docName = s.title || 'الطبيب', specialty = s.specialty || '';
       var mobile = s.mobile || '', landline = s.landline || '', address = s.address || '';
       var emblem = '<svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 86 C22 64 9 46 9 31 A20 20 0 0 1 50 23 A20 20 0 0 1 91 31 C91 46 78 64 50 86 Z" fill="none" stroke="#0d9488" stroke-width="3.4"/><rect x="44" y="36" width="12" height="30" rx="2" fill="#0d9488"/><rect x="35" y="45" width="30" height="12" rx="2" fill="#0d9488"/></svg>';
-      var brandHtml = '<div class="brand-emblem">' + emblem + '</div><div class="brand-text"><span class="b1">Doc</span><span class="b2">Book</span></div>';
+      var brandHtml = '<img src="brand-logo.png" style="height:76px;width:auto;display:block;" alt="DocBook">';
       var css = '@page{size:A4;margin:0;}'
         + '*{font-family:Cairo,Tajawal,Arial,sans-serif;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}'
         + 'html,body{margin:0;padding:0;background:#fff;}'
