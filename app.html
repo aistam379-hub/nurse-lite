@@ -367,7 +367,7 @@
           </div>
 
           <div style="display:flex; gap:12px; margin-bottom:16px;">
-            <button id="addNewPatientBtn" class="btn-primary" style="font-size:.85rem; padding:9px 16px;">
+            <button id="addNewPatientBtn" class="btn-primary" style="font-size:.85rem; padding:9px 16px;" onclick="document.getElementById('patientBookModal').classList.remove('hidden')">
               <i class="fas fa-user-plus"></i> مريض جديد
             </button>
             <div class="search-wrapper" style="flex:1; margin-bottom:0;">
@@ -994,8 +994,8 @@
         <select id="patientBookSlot" class="form-input"></select>
       </div>
       <div style="padding:16px; border-top:1.5px solid var(--border); display:flex; gap:10px;">
-        <button id="cancelPatientBtn" class="btn-secondary" style="flex:1;">إلغاء</button>
-        <button id="submitPatientBookBtn" class="btn-primary" style="flex:1;">تسجيل</button>
+        <button id="cancelPatientBtn" class="btn-secondary" style="flex:1;" onclick="document.getElementById('patientBookModal').classList.add('hidden')">إلغاء</button>
+        <button id="submitPatientBookBtn" class="btn-primary" style="flex:1;" onclick="window._submitNewPatient&&window._submitNewPatient()">تسجيل</button>
       </div>
     </div>
   </div>
@@ -1072,8 +1072,8 @@
                   <span id="logoPreviewIcon"><i class="fas fa-user-nurse"></i></span>
                   <img id="logoPreviewImg" class="hidden" src="" alt="">
                 </div>
-                <label for="logoFileInput" class="s-avatar-cam" title="تغيير الصورة"><i class="fas fa-camera"></i></label>
-                <input type="file" id="logoFileInput" accept="image/*" class="hidden">
+                <label class="s-avatar-cam" title="تغيير الصورة" onclick="document.getElementById('logoFileInput').click()"><i class="fas fa-camera"></i></label>
+                <input type="file" id="logoFileInput" accept="image/*" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;">
               </div>
               <div style="flex:1;min-width:0;">
                 <p style="font-weight:800;font-size:.95rem;color:var(--text);margin-bottom:2px;" id="profileDisplayName">لوحة الممرضة</p>
