@@ -1112,21 +1112,22 @@
     };
     window.openSettingsModal = function() {
       switchSettingsPanel('profile');
-      document.getElementById('settingsTitleInput').value = settings.title || 'لوحة الممرضة';
-      document.getElementById('profileDisplayName').textContent = settings.title || 'لوحة الممرضة';
-      const previewImg  = document.getElementById('logoPreviewImg');
-      const previewIcon = document.getElementById('logoPreviewIcon');
-      const removeBtn   = document.getElementById('removeLogoBtn');
+      var titleInput = document.getElementById('settingsTitleInput');
+      var displayName = document.getElementById('profileDisplayName');
+      if (titleInput) titleInput.value = settings.title || 'لوحة الممرضة';
+      if (displayName) displayName.textContent = settings.title || 'لوحة الممرضة';
+      var previewImg  = document.getElementById('logoPreviewImg');
+      var previewIcon = document.getElementById('logoPreviewIcon');
+      var removeBtn   = document.getElementById('removeLogoBtn');
       if (settings.logo) {
-        previewImg.src = settings.logo; previewImg.classList.remove('hidden');
-        previewIcon.classList.add('hidden'); removeBtn.classList.remove('hidden');
+        if (previewImg)  { previewImg.src = settings.logo; previewImg.classList.remove('hidden'); }
+        if (previewIcon) previewIcon.classList.add('hidden');
+        if (removeBtn)   removeBtn.classList.remove('hidden');
       } else {
-        previewImg.classList.add('hidden'); previewIcon.classList.remove('hidden'); removeBtn.classList.add('hidden');
+        if (previewImg)  previewImg.classList.add('hidden');
+        if (previewIcon) previewIcon.classList.remove('hidden');
+        if (removeBtn)   removeBtn.classList.add('hidden');
       }
-      renderSlotSettingsEditor();
-      renderWeeklyOffChips();
-      updateAmPm('slotGenFrom','_ap_f1'); updateAmPm('slotGenTo','_ap_t1');
-      updateAmPm('slotGenFrom2','_ap_f2'); updateAmPm('slotGenTo2','_ap_t2');
       document.getElementById('settingsModal').classList.remove('hidden');
     };
     // ── محرر سلوتات المواعيد ──
