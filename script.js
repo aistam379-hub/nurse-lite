@@ -3372,7 +3372,8 @@
 
       // Nav listeners
       document.getElementById('sidebarPatients').addEventListener('click',()=>setActiveSection('patients'));
-      document.getElementById('mobilePatients').addEventListener('click',()=>setActiveSection('patients'));
+      var _mobPat = document.getElementById('mobilePatients');
+      if (_mobPat) _mobPat.addEventListener('click',()=>setActiveSection('patients'));
 
       document.getElementById('addNewPatientBtn').addEventListener('click',()=>document.getElementById('patientBookModal').classList.remove('hidden'));
       document.getElementById('patientBookSearch').addEventListener('input',(e)=>{ patientSearchQuery=e.target.value; renderPatientBook(); });
